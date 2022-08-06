@@ -25,25 +25,12 @@ def main():
     parser.add_argument('catalog_filepath', help='путь к excel каталогу')
     args = parser.parse_args()
 
-
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
 
     template = env.get_template('template.html')
-
-
-    def get_age_string(foundation):
-        years = datetime.datetime.now().year - foundation
-        i = years % 10
-        if i == 1:
-            return f'{years} год'
-        elif i < 5:
-            return f'{years} года'
-        else:
-            return f'{years} лет'
-
 
     wines = pandas.read_excel(args.catalog_filepath,
                               sheet_name='Лист1',
